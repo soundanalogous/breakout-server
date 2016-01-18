@@ -10,7 +10,7 @@ If you're looking for a pure node.js implementation for Arduino, please see [joh
 $ npm install breakout-server
 ```
 
-This will only install the server. You will need to clone or download [Breakout.js](https://github.com/soundanalogous/Breakout) separately.
+This will only install the server. You will need to clone or download [Breakout.js](https://github.com/soundanalogous/Breakout) separately. Minimally all you need from Breakout.js is the files in `Breakout/dist/` and the firmware in `Breakout/firmware/`.
 
 *Windows users, refer to the [readme](https://github.com/voodootikigod/node-serialport/blob/master/README.md) for node-serialport before attempting to install breakout-server.*
 
@@ -19,16 +19,16 @@ This will only install the server. You will need to clone or download [Breakout.
 #### Install required Arduino libraries
 
 1. Install [ConfigurableFirmata](https://github.com/firmata/ConfigurableFirmata) to your Arduino sketchbook library. The easiest way to get it if you are using Arduino 1.6.4 or higher is using the Arduino Library Manager. In the Arduino IDE, go to `Sketch > Include Library > Manage Libraries` then search for "ConfigurableFirmata" and click Install after tapping on the ConfigurableFirmata item in the filtered results. Otherwise, following the instructions in the ConfigurableFirmata readme.
-2. Download or clone [Breakout.js](https://github.com/soundanalogous/Breakout) and navigate to *Breakout/firmata/BreakoutFirmata* and open **BreakoutFirmata.ino** in the Arduino IDE. Compile and upload the sketch to your board.
+2. Download or clone [Breakout.js](https://github.com/soundanalogous/Breakout) and navigate to `Breakout/firmata/BreakoutFirmata` and open `BreakoutFirmata.ino` in the Arduino IDE. Compile and upload the sketch to your board.
 
 #### Running breakout-server
 
 Run `node server.js --help` to view the command line options.
 
-#### -p
+##### -p
 
 You will need to provide the name of the serial port you are connecting to. You can get the name
-by connecting a board to your computer, opening the Arduino IDE and then navigating to `Tools > Port` in the menu. When running the server, specify the port using the `-p` command as follows (substitution in the serial port name for your attached board):
+by connecting a board to your computer, and running `ls /dev/tty.*` in the terminal in OS X, `ls /dev/ttyACM*` in the terminal in Linux, or get it from the Arduino IDE under `Tools -> Serial Port`. When running the server, specify the port using the `-p` command as follows (substituting in the serial port name for your attached board):
 
 ```bash
 $ node breakout-server/server.js -p /dev/cu.usbmodem14241
@@ -40,14 +40,14 @@ You can alternatively change the default serial port name by updating the follow
   .option('-p, --port <device>', 'Specify the serial port [/dev/cu.usbmodemfd121]', '/dev/cu.usbmodemfd121')
 ```
 
-#### -d
+##### -d
 
 It is important to understand the relative path from where you run breakout-server to the root of the website. You may need to supply the path using the `-d` option depending on the location of your index.html file relative to where you run the server from. For example, if you created a project directory and installed breakout-server into that directory using npm and you also created another folder named 'public' that contains your static files, then you would run the server from the root of the project directory as follows:
 
 ```bash
 $ node breakout-server/server.js -p /dev/cu.usbmodem14241 -d public
 ```
-And then in your browser navigate to: `http://localhost:88887/index.html`
+And then in your browser navigate to: `http://localhost:88887/`
 
 To run the examples included with breakout-server, navigate to the breakout-server directory and run server.js:
 
@@ -70,7 +70,7 @@ And then in your browser navigate to: `http://localhost:8887/examples`
 
 **Schematics for the examples can be found here:** http://breakoutjs.com/examples/schematics.pdf
 
-#### Additional command line options
+##### Additional command line options
 
 There are 2 additional command line options:
 
