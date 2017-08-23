@@ -27,6 +27,7 @@ var program = require('commander');
 program
   .version('0.4.0')
   .option('-p, --port <device>', 'Specify the serial port [/dev/tty.usbmodemfd121]', '/dev/tty.usbmodemfd121')
+  .option('-b, --baud-rate <baud rate>', 'Specify the baud rate [57600]', Number, 57600)
   .option('-s, --server <port>', 'Specify the port [8887]', Number, 8887)
   .option('-m, --multi <connection>', 'Enable multiple connections [false]', "false")
   .option('-d, --dir <path>', 'Path to the root of your app [defaults to the current directory]', '.')
@@ -54,7 +55,7 @@ var serialPort = serialport.SerialPort;
 var port = program.port;
 
 var serialDefaults = {
-  baudrate: 57600,
+  baudrate: program.baudRate,
   buffersize: 1
 };
 
